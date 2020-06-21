@@ -76,7 +76,7 @@ services:
         build:
             context: .
             target: artisan
-        command: scheduler
+        command: sh /usr/local/bin/scheduler
         container_name: ${COMPOSE_PROJECT_NAME:-default}-scheduler
         volumes:
             - ${VOLUME}:/code:cached
