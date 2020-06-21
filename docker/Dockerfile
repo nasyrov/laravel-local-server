@@ -26,3 +26,17 @@ RUN docker-php-ext-enable redis
 
 COPY conf/php.ini /usr/local/etc/php
 COPY conf/opcache.ini /usr/local/etc/php/conf.d
+
+#
+# Artisan
+#
+FROM php:cli-alpine as artisan
+
+WORKDIR /code
+
+RUN docker-php-ext-install bcmath pdo_mysql
+
+RUN pecl install redis
+RUN docker-php-ext-enable redis
+
+RUN apk del .build-deps
