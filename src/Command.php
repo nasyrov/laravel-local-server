@@ -3,6 +3,7 @@
 namespace Nasyrov\Laravel\LocalServer;
 
 use Composer\Command\BaseCommand;
+use InvalidArgumentException;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -13,7 +14,7 @@ class Command extends BaseCommand
         //
     ];
 
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('local-server')
@@ -25,7 +26,7 @@ class Command extends BaseCommand
             ->setAliases(['local-server'])
             ->setHelp(
                 <<<EOT
-Run the Laravel local server.
+Run the local server.
 
 Start the local server:
     start
@@ -43,12 +44,12 @@ EOT
             );
     }
 
-    public function isProxyCommand()
+    public function isProxyCommand(): bool
     {
         return true;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $subcommand = $input->getArgument('subcommand');
 
@@ -59,6 +60,8 @@ EOT
         $subcommandClass    = $this->subcommands[$subcommand];
         $subcommandInstance = new $subcommandClass($this->getApplication());
 
-        $subcommandInstance($input, $output);
+        $exitCode = $subcommandInstance($input, $output);
+
+        return $exitCode;
     }
 }

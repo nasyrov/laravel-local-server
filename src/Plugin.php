@@ -10,12 +10,12 @@ use Composer\Plugin\PluginInterface;
 
 class Plugin implements PluginInterface, Capable
 {
-    public function activate(Composer $composer, IOInterface $io)
+    public function activate(Composer $composer, IOInterface $io): void
     {
         //
     }
 
-    public function getCapabilities()
+    public function getCapabilities(): array
     {
         return [
             ComposerCommandProvider::class => CommandProvider::class,
