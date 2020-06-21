@@ -18,7 +18,7 @@ abstract class Subcommand
         $this->application = $application;
     }
 
-    abstract public function __invoke(InputInterface $input, OutputInterface $output): void;
+    abstract public function __invoke(InputInterface $input, OutputInterface $output): int;
 
     protected function runProcess(string $command): int
     {
