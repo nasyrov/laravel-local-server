@@ -3,6 +3,8 @@
 #
 FROM traefik:alpine as proxy
 
+WORKDIR /code
+
 COPY conf/traefik.toml /etc/traefik
 
 #
@@ -10,12 +12,16 @@ COPY conf/traefik.toml /etc/traefik
 #
 FROM nginx:alpine as frontend
 
+WORKDIR /code
+
 COPY conf/default.conf /etc/nginx/conf.d
 
 #
 # Backend
 #
 FROM php:fpm-alpine as backend
+
+WORKDIR /code
 
 RUN docker-php-ext-install bcmath opcache pdo_mysql
 
@@ -29,6 +35,8 @@ COPY conf/opcache.ini /usr/local/etc/php/conf.d
 # Artisan
 #
 FROM php:cli-alpine as artisan
+
+WORKDIR /code
 
 COPY scheduler /usr/local/bin
 
