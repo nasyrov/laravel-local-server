@@ -24,7 +24,7 @@ composer require nasyrov/laravel-local-server --dev
 
 To start the local server, simply run `composer local-server start`. The first time this will download all the necessary Docker images. Once the initial install is over and download have completed, you should see the output:
 
-``` sh
+```sh
 Starting blog-proxy      ... done
 Starting blog-redis      ... done
 Starting blog-mailhog    ... done
@@ -54,25 +54,28 @@ To destroy the local server containers, simply run `composer local-server destro
 To get details on the running local server status and containers, run `composer local-server status`. You should see output similar to:
 
 ```sh
-     Name                          Command                 State                         Ports
-------------------------------------------------------------------------------------------------------------------------
-blog-mysql           docker-entrypoint.sh --def ...   Up (healthy)   3306/tcp, 33060/tcp
-blog-nginx           nginx -g daemon off;             Up             80/tcp
-blog-php             docker-php-entrypoint php-fpm    Up             9000/tcp
-blog-phpmyadmin      /docker-entrypoint.sh apac ...   Up             80/tcp
-blog-proxy           /traefik                         Up             0.0.0.0:80->80/tcp, 0.0.0.0:8080->8080/tcp
-blog-redis           docker-entrypoint.sh redis ...   Up             6379/tcp
+     Name                    Command                  State                         Ports
+------------------------------------------------------------------------------------------------------------
+blog-backend      docker-php-entrypoint php-fpm    Up             9000/tcp
+blog-frontend     nginx -g daemon off;             Up             80/tcp
+blog-mailhog      MailHog                          Up             1025/tcp, 8025/tcp
+blog-mysql        docker-entrypoint.sh --def ...   Up (healthy)   3306/tcp, 33060/tcp
+blog-phpmyadmin   /docker-entrypoint.sh apac ...   Up             80/tcp
+blog-proxy        /entrypoint.sh traefik           Up             0.0.0.0:80->80/tcp, 0.0.0.0:8080->8080/tcp
+blog-redis        docker-entrypoint.sh redis ...   Up (healthy)   6379/tcp
+blog-scheduler    docker-php-entrypoint sh / ...   Up
+blog-worker       docker-php-entrypoint php  ...   Up
 ```
 
 All containers should have a status of "Up". If they do not, you can inspect the logs for each service by running `composer local-server logs <service>`, for example, if `blog-mysql` shows a status other than "Up", run `composer local-server logs mysql`.
 
 ### Viewing the local server logs
 
-Often you'll want to access logs from the services that local server provides. For example, PHP errors logs, Nginx access logs, or MySQL logs. To do so, run the `composer local-server logs <service>` command, where `<service>` can be any of `php`, `nginx`, `mysql`, `redis`. This command will tail the logs (live update). To exit the log view, simply press `Ctrl+C`.
+Often you'll want to access logs from the services that local server provides. For example, PHP errors logs, Nginx access logs, or MySQL logs. To do so, run the `composer local-server logs <service>` command, where `<service>` can be any of `proxy`, `frontend`, `backend`, `worker`, `scheduler`, `phpmyadmin`, `mysql`, `redis`. This command will tail the logs (live update). To exit the log view, simply press `Ctrl+C`.
 
 ## Testing
 
-``` bash
+```bash
 composer test
 ```
 
