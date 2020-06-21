@@ -9,7 +9,7 @@ class CommandProvider implements ComposerCommandProvider
     public function getCommands(): array
     {
         return [
-            //
+            new Command,
         ];
     }
 }
