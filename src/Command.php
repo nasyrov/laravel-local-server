@@ -11,7 +11,13 @@ use Symfony\Component\Console\Output\OutputInterface;
 class Command extends BaseCommand
 {
     protected $subcommands = [
-        //
+        'artisan' => Subcommands\ArtisanSubcommand::class,
+        'build'   => Subcommands\BuildSubcommand::class,
+        'destroy' => Subcommands\DestroySubcommand::class,
+        'logs'    => Subcommands\LogsSubcommand::class,
+        'start'   => Subcommands\StartSubcommand::class,
+        'status'  => Subcommands\StatusSubcommand::class,
+        'stop'    => Subcommands\StopSubcommand::class,
     ];
 
     protected function configure(): void
@@ -54,7 +60,7 @@ EOT
         $subcommand = $input->getArgument('subcommand');
 
         if (!isset($this->subcommands[$subcommand])) {
-            throw new InvalidArgumentException('Invalid subcommand given: '.$subcommand);
+            throw new InvalidArgumentException(sprintf('Invalid subcommand given: %s', $subcommand));
         }
 
         $subcommandClass    = $this->subcommands[$subcommand];
