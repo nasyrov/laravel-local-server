@@ -1,0 +1,158 @@
+version: '2.4'
+
+services:
+    proxy:
+        build:
+            context: .
+            target: proxy
+        container_name: ${COMPOSE_PROJECT_NAME:-default}-proxy
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+        ports:
+            - 80:80
+            - 8080:8080
+        networks:
+            - laravel
+        labels:
+            traefik.enable: false
+
+    frontend:
+        build:
+            context: .
+            target: frontend
+        container_name: ${COMPOSE_PROJECT_NAME:-default}-frontend
+        volumes:
+            - ${VOLUME}/public:/code/public:cached
+            - ${VOLUME}/storage/app/public:/code/public/storage:cached
+        networks:
+            - default
+            - laravel
+        depends_on:
+            backend:
+                condition: service_started
+        labels:
+            traefik.docker.network: laravel
+            traefik.frontend.rule: HostRegexp:${COMPOSE_PROJECT_NAME:-default}.localtest.me,{subdomain:[a-z]+}.${COMPOSE_PROJECT_NAME:-default}.localtest.me
+            traefik.frontend.priority: 1
+
+    backend:
+        build:
+            context: .
+            target: backend
+        container_name: ${COMPOSE_PROJECT_NAME:-default}-backend
+        volumes:
+            - ${VOLUME}:/code:cached
+        networks:
+            - default
+        depends_on:
+            mysql:
+                condition: service_healthy
+            redis:
+                condition: service_healthy
+        labels:
+            traefik.enable: false
+
+    worker:
+        build:
+            context: .
+            target: artisan
+        command: php artisan queue:work
+        container_name: ${COMPOSE_PROJECT_NAME:-default}-worker
+        volumes:
+            - ${VOLUME}:/code:cached
+        networks:
+            - default
+        depends_on:
+            mysql:
+                condition: service_healthy
+            redis:
+                condition: service_healthy
+            mailhog:
+                condition: service_started
+        labels:
+            traefik.enable: false
+
+    scheduler:
+        build:
+            context: .
+            target: artisan
+        command: scheduler
+        container_name: ${COMPOSE_PROJECT_NAME:-default}-scheduler
+        volumes:
+            - ${VOLUME}:/code:cached
+        networks:
+            - default
+        depends_on:
+            mysql:
+                condition: service_healthy
+            redis:
+                condition: service_healthy
+            mailhog:
+                condition: service_started
+        labels:
+            traefik.enable: false
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        container_name: ${COMPOSE_PROJECT_NAME:-default}-phpmyadmin
+        networks:
+            - default
+            - laravel
+        environment:
+            PMA_HOST: mysql
+            PMA_USER: laravel
+            PMA_PASSWORD: laravel
+        depends_on:
+            mysql:
+                condition: service_healthy
+        labels:
+            traefik.docker.network: laravel
+            traefik.frontend.rule: Host:phpmyadmin.${COMPOSE_PROJECT_NAME:-default}.localtest.me
+            traefik.frontend.priority: 2
+
+    mysql:
+        image: mysql:8.0
+        container_name: ${COMPOSE_PROJECT_NAME:-default}-mysql
+        command: --default-authentication-plugin=mysql_native_password
+        environment:
+            MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+            MYSQL_DATABASE: laravel
+            MYSQL_USER: laravel
+            MYSQL_PASSWORD: laravel
+        volumes:
+            - mysql-data:/var/lib/mysql
+        networks:
+            - default
+        healthcheck:
+            test: mysqladmin ping
+        labels:
+            traefik.enable: false
+
+    redis:
+        image: redis:alpine
+        container_name: ${COMPOSE_PROJECT_NAME:-default}-redis
+        networks:
+            - default
+        healthcheck:
+            test: redis-cli ping
+        labels:
+            traefik.enable: false
+
+    mailhog:
+        image: mailhog/mailhog
+        container_name: ${COMPOSE_PROJECT_NAME:-default}-mailhog
+        networks:
+            - default
+            - laravel
+        labels:
+            traefik.port: 8025
+            traefik.docker.network: laravel
+            traefik.frontend.rule: Host:mailhog.${COMPOSE_PROJECT_NAME:-default}.localtest.me
+            traefik.frontend.priority: 3
+
+volumes:
+    mysql-data:
+
+networks:
+    laravel:
+        external: true
