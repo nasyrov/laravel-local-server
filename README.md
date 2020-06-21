@@ -20,9 +20,15 @@ composer require nasyrov/laravel-local-server --dev
 
 ## Usage
 
+The local server uses the command line via the `composer` command.
+
+Navigate your shell to your project's directory. You should already have installed Laravel by running `laravel new` or `composer create-project` but if not, do so now. See [Installing Laravel](https://laravel.com/docs/master#installing-laravel).
+
 ### Starting the local server
 
-To start the local server, simply run `composer local-server start`. The first time this will download all the necessary Docker images. Once the initial install is over and download have completed, you should see the output:
+To start the local server, simply run `composer local-server start`. The first time this will download all the necessary Docker images.
+
+Once the initial install is over and download have completed, you should see the output:
 
 ```sh
 Starting blog-proxy      ... done
