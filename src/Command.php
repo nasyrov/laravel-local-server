@@ -60,7 +60,7 @@ EOT
         $subcommand = $input->getArgument('subcommand');
 
         if (!isset($this->subcommands[$subcommand])) {
-            throw new InvalidArgumentException(\Safe\sprintf('Invalid subcommand given: %s', $subcommand));
+            throw new InvalidArgumentException(sprintf('Invalid subcommand given: %s', $subcommand));
         }
 
         $subcommandClass    = $this->subcommands[$subcommand];

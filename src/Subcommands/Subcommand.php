@@ -37,7 +37,7 @@ abstract class Subcommand
     {
         return [
             'COMPOSE_PROJECT_NAME' => $this->getProjectName(),
-            'VOLUME'               => \Safe\getcwd(),
+            'VOLUME'               => getcwd(),
             'PATH'                 => getenv('PATH'),
 
             // Windows-specific
@@ -48,8 +48,8 @@ abstract class Subcommand
 
     protected function getProjectName(): string
     {
-        $projectName = basename(\Safe\getcwd());
-        $projectName = \Safe\preg_replace('/[^A-Za-z0-9\-\_]/', '', $projectName);
+        $projectName = basename(getcwd());
+        $projectName = preg_replace('/[^A-Za-z0-9\-\_]/', '', $projectName);
 
         return $projectName;
     }

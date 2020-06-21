@@ -22,11 +22,11 @@ class StartSubcommand extends Subcommand
             return $isStartupFailed;
         }
 
-        $siteUrl = \Safe\sprintf('http://%s.localtest.me/', $this->getProjectName());
+        $siteUrl = sprintf('http://%s.localtest.me/', $this->getProjectName());
 
         $output->writeln('');
         $output->writeln('<info>Your local server is ready!</>');
-        $output->writeln(\Safe\sprintf('<info>To access your site visit:</> <comment>%s</>', $siteUrl));
+        $output->writeln(sprintf('<info>To access your site visit:</> <comment>%s</>', $siteUrl));
 
         return $isStartupFailed;
     }
@@ -47,7 +47,7 @@ class StartSubcommand extends Subcommand
             return;
         }
 
-        $isFailed = $this->runProcess(\Safe\sprintf('docker network create %s', $requiredNetwork));
+        $isFailed = $this->runProcess(sprintf('docker network create %s', $requiredNetwork));
 
         if ($isFailed) {
             $output->writeln('<error>Sorry, the local server is failed to setup the required network.</>');

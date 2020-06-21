@@ -13,6 +13,6 @@ class LogsSubcommand extends Subcommand
     {
         $service = $input->getArgument('options')[0];
 
-        return $this->runProcess(\Safe\sprintf(static::COMMAND, $service));
+        return $this->runProcess(sprintf(static::COMMAND, $service));
     }
 }
