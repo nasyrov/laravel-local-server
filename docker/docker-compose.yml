@@ -100,8 +100,8 @@ services:
             - laravel
         environment:
             PMA_HOST: mysql
-            PMA_USER: wptrail
-            PMA_PASSWORD: wptrail
+            PMA_USER: laravel
+            PMA_PASSWORD: laravel
         depends_on:
             mysql:
                 condition: service_healthy
@@ -116,9 +116,9 @@ services:
         command: --default-authentication-plugin=mysql_native_password
         environment:
             MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-            MYSQL_DATABASE: wptrail
-            MYSQL_USER: wptrail
-            MYSQL_PASSWORD: wptrail
+            MYSQL_DATABASE: laravel
+            MYSQL_USER: laravel
+            MYSQL_PASSWORD: laravel
         volumes:
             - mysql-data:/var/lib/mysql
         networks:
