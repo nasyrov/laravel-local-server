@@ -4,6 +4,7 @@ namespace Nasyrov\Laravel\LocalServer;
 
 use Composer\Composer;
 use Composer\IO\IOInterface;
+use Composer\Plugin\Capability\CommandProvider as ComposerCommandProvider;
 use Composer\Plugin\Capable;
 use Composer\Plugin\PluginInterface;
 
@@ -17,7 +18,7 @@ class Plugin implements PluginInterface, Capable
     public function getCapabilities()
     {
         return [
-            //
+            ComposerCommandProvider::class => CommandProvider::class,
         ];
     }
 }
