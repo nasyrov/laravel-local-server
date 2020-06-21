@@ -30,6 +30,8 @@ COPY conf/opcache.ini /usr/local/etc/php/conf.d
 #
 FROM php:cli-alpine as artisan
 
+COPY scheduler /usr/local/bin
+
 RUN docker-php-ext-install bcmath pdo_mysql
 
 RUN pecl install redis
