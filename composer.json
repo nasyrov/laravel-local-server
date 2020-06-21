@@ -1,0 +1,40 @@
+{
+    "name": "nasyrov/laravel-local-server",
+    "type": "composer-plugin",
+    "description": "The local server package providers a local development environment for Laravel projects.",
+    "keywords": [
+        "laravel",
+        "docker"
+    ],
+    "homepage": "https://github.com/nasyrov/laravel-local-server",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Evgenii Nasyrov",
+            "email": "inasyrov@ya.ru",
+            "homepage": "https://github.com/nasyrov",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=7.2"
+    },
+    "require-dev": {
+    },
+    "autoload": {
+        "psr-4": {
+            "Nasyrov\\Laravel\\LocalServer\\": "src"
+        }
+    },
+    "scripts": {
+        "test": [
+            "phpcs -p --standard=psr2 src"
+        ]
+    },
+    "extra": {
+        "class": "Nasyrov\\Laravel\\LocalServer\\Plugin"
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
