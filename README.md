@@ -68,7 +68,7 @@ All containers should have a status of "Up". If they do not, you can inspect the
 
 ### Viewing the local server logs
 
-Often you'll want to access logs from the services that local server provides. For example, PHP errors logs, Nginx access logs, or MySQL logs. To do so, run the `composer local-server logs <service>` command, where `<service>` can be any of `php`, `nginx`, `mysql`, `redis`. This command will tail the logs.
+Often you'll want to access logs from the services that local server provides. For example, PHP errors logs, Nginx access logs, or MySQL logs. To do so, run the `composer local-server logs <service>` command, where `<service>` can be any of `php`, `nginx`, `mysql`, `redis`. This command will tail the logs (live update). To exit the log view, simply press `Ctrl+C`.
 
 ## Testing
 
