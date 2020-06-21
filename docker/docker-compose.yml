@@ -59,7 +59,7 @@ services:
         command: php artisan queue:work
         container_name: ${COMPOSE_PROJECT_NAME:-default}-worker
         volumes:
-            - .:/code:cached
+            - ${VOLUME}:/code:cached
         networks:
             - default
         depends_on:
@@ -79,7 +79,7 @@ services:
         command: sh scheduler
         container_name: ${COMPOSE_PROJECT_NAME:-default}-scheduler
         volumes:
-            - .:/code:cached
+            - ${VOLUME}:/code:cached
         networks:
             - default
         depends_on:
