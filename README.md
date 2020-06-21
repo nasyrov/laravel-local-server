@@ -6,7 +6,7 @@ The local server package providers a local development environment for Laravel p
 
 Make sure all dependencies have been installed before moving on:
 
-* [PHP](http://php.net/manual/en/install.php) >= 7.1
+* [PHP](http://php.net/manual/en/install.php) >= 7.2
 * [Composer](https://getcomposer.org/download/)
 * [Docker Desktop](https://www.docker.com/products/docker-desktop)
 
