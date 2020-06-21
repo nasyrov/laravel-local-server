@@ -36,7 +36,7 @@
         "analyse": [
             "phpstan analyse -l 0 src"
         ],
-        "test": [
+        "lint": [
             "phpcs -p --standard=psr2 src"
         ]
     },
