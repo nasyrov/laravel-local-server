@@ -25,17 +25,18 @@ composer require nasyrov/laravel-local-server --dev
 To start the local server, simply run `composer local-server start`. The first time this will download all the necessary Docker images. Once the initial install is over and download have completed, you should see the output:
 
 ``` sh
-Starting...
-Starting blog-proxy         ... done
-Starting blog-redis         ... done
-Starting blog-mysql         ... done
-Starting blog-php           ... done
-Starting blog-phpmyadmin    ... done
-Starting blog-nginx         ... done
-Started.
+Starting blog-proxy      ... done
+Starting blog-redis      ... done
+Starting blog-mailhog    ... done
+Starting blog-mysql      ... done
+Starting blog-backend    ... done
+Starting blog-phpmyadmin ... done
+Starting blog-worker     ... done
+Starting blog-scheduler  ... done
+Starting blog-frontend   ... done
 
-To access site please visit: http://blog.localtest.me/
-To access phpmyadmin please visit: http://phpmyadmin.blog.localtest.me/
+Your local server is ready!
+To access your site visit: http://blog.localtest.me/
 ```
 
 Visiting your site's URL should now work.
