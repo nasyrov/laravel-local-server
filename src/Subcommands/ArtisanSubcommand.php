@@ -7,13 +7,13 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ArtisanSubcommand extends Subcommand
 {
-    const COMMAND = 'docker-compose exec -T -u nobody artisan %s';
+    const COMMAND = 'docker-compose exec -T -u nobody backend php artisan %s';
 
     public function __invoke(InputInterface $input, OutputInterface $output): int
     {
         $options = $input->getArgument('options');
         $options = implode(' ', $options);
 
-        return $this->runProcess(static::COMMAND, $options);
+        return $this->runProcess(sprintf(static::COMMAND, $options));
     }
 }
