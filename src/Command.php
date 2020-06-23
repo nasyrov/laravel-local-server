@@ -14,6 +14,7 @@ class Command extends BaseCommand
         'artisan' => Subcommands\ArtisanSubcommand::class,
         'build'   => Subcommands\BuildSubcommand::class,
         'destroy' => Subcommands\DestroySubcommand::class,
+        'eject'   => Subcommands\EjectSubcommand::class,
         'logs'    => Subcommands\LogsSubcommand::class,
         'start'   => Subcommands\StartSubcommand::class,
         'status'  => Subcommands\StatusSubcommand::class,
