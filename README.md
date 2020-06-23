@@ -79,6 +79,12 @@ All containers should have a status of "Up". If they do not, you can inspect the
 
 Often you'll want to access logs from the services that local server provides. For example, PHP errors logs, Nginx access logs, or MySQL logs. To do so, run the `composer local-server logs <service>` command, where `<service>` can be any of `proxy`, `frontend`, `backend`, `worker`, `scheduler`, `phpmyadmin`, `mysql`, `redis`. This command will tail the logs (live update). To exit the log view, simply press `Ctrl+C`.
 
+### Ejecting the local server configuration
+
+If you aren’t satisfied with the preselected services and configuration choices, you can `eject` at any time. It will copy all the configuration files into your project.
+
+You don’t have to ever use `eject`. The curated service set is suitable for small to middle deployments, and you shouldn’t feel obligated to use this command. However we understand that this package wouldn’t be useful if you couldn’t customize it when you are ready for it.
+
 ## Testing
 
 ```bash
