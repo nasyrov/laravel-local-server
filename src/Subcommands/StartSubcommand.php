@@ -8,7 +8,7 @@ use Symfony\Component\Process\Process;
 
 class StartSubcommand extends Subcommand
 {
-    const COMMAND = 'docker-compose up -d';
+    const COMMAND = 'docker-compose up -d --remove-orphans';
 
     public function __invoke(InputInterface $input, OutputInterface $output): int
     {
