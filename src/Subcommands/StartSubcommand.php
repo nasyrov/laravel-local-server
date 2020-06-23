@@ -14,6 +14,8 @@ class StartSubcommand extends Subcommand
     {
         $this->ensureNetworkPresence($output);
 
+        $output->writeln('<info>Starting...</>');
+
         $isStartupFailed = $this->runProcess(static::COMMAND);
 
         if ($isStartupFailed) {
