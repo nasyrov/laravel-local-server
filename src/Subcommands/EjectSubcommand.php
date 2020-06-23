@@ -18,11 +18,11 @@ class EjectSubcommand extends Subcommand
 
             $filesystem->mirror(__DIR__.'/../../docker', getcwd().'/docker');
 
-            $output->writeln('<info>Your local server configuration is ejected successfully!</>');
+            $output->writeln('<info>Your local server configuration files are ejected successfully!</>');
 
             return 0;
         } catch (IOExceptionInterface $exception) {
-            $output->writeln('<error>Sorry, something went wrong there.</>');
+            $output->writeln('<error>Sorry, the local server is failed to eject configuration files.</>');
 
             return 1;
         }
