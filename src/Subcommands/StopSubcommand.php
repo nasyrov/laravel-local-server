@@ -11,6 +11,8 @@ class StopSubcommand extends Subcommand
 
     public function __invoke(InputInterface $input, OutputInterface $output): int
     {
+        $output->writeln('<info>Stopping...</>');
+
         return $this->runProcess(static::COMMAND);
     }
 }

@@ -11,6 +11,8 @@ class DestroySubcommand extends Subcommand
 
     public function __invoke(InputInterface $input, OutputInterface $output): int
     {
+        $output->writeln('<info>Destroying...</>');
+
         return $this->runProcess(static::COMMAND);
     }
 }
