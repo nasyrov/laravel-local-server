@@ -9,8 +9,6 @@ use Symfony\Component\Process\Process;
 
 abstract class Subcommand
 {
-    const CWD = 'vendor/nasyrov/laravel-local-server/docker';
-
     protected $application;
 
     public function __construct(Application $application)
@@ -22,7 +20,7 @@ abstract class Subcommand
 
     protected function runProcess(string $command): int
     {
-        $process = new Process($command, static::CWD, $this->getEnvironmentVariables());
+        $process = new Process($command, $this->getConfigDirectory(), $this->getEnvironmentVariables());
 
         $process->setTimeout(0);
 
@@ -31,6 +29,13 @@ abstract class Subcommand
         });
 
         return $exitCode;
+    }
+
+    protected function getConfigDirectory(): string
+    {
+        return is_dir(getcwd().'/docker')
+            ? getcwd().'/docker'
+            : getcwd().'/vendor/nasyrov/laravel-local-server/docker';
     }
 
     protected function getEnvironmentVariables(): array
