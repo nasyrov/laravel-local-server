@@ -83,7 +83,9 @@ Often you'll want to access logs from the services that local server provides. F
 
 If you aren’t satisfied with the preselected services and configuration choices, you can `eject` at any time. It will copy all the configuration files into your project.
 
-You don’t have to ever use `eject`. The curated service set is suitable for small to middle deployments, and you shouldn’t feel obligated to use this command. However we understand that this package wouldn’t be useful if you couldn’t customize it when you are ready for it.
+You don’t have to ever use `eject`. The curated service set is suitable for small to middle deployments, and you shouldn’t feel obligated to use this command. However I understand that this package wouldn’t be useful if you couldn’t customize it when you are ready for it.
+
+See custom [recipes](../../wiki/Recipes).
 
 ## Testing
 
